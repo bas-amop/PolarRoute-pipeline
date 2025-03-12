@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Implementation - PolarRoute-pipeline</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Implementation";
+        var mkdocs_page_input_path = "implementation.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> PolarRoute-pipeline
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Implementation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#basic-process-flow-diagram">Basic process flow diagram</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#detailed-process-flow-diagram">Detailed process flow diagram</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#history">History</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#september-2024-onwards">September 2024 onwards</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../installation/">Installing the pipeline</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../setting-up/">Setting up the pipeline</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../using/">Using the pipeline</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../how-polarroute-pipeline-works/">How PolarRoute-pipeline works</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../development/">Development</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">PolarRoute-pipeline</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Implementation</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/bas-amop/PolarRoute-pipeline/edit/master/docs/implementation.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="implementation">Implementation</h1>
+<p><em>PolarRoute-pipeline</em> is one of three broadly distinct components of the Operational PolarRoute (OPR) project.</p>
+<ol>
+<li>
+<p><strong>PolarRoute-pipeline (<a href="https://github.com/bas-amop/PolarRoute-pipeline">this repo</a>)</strong><br />
+Required data products are downloaded, stored and processed shoreside where the data and compute resources are abundant. This generates ocean/sea-ice meshes (and routes if required) for areas of operational interest. These generated outputs are compressed and transferred via satellite (or other) link to shipside. PolarRoute-pipeline is built on the technologies of <a href="https://github.com/bas-amop/PolarRoute">PolarRoute</a> and <a href="https://github.com/bas-amop/MeshiPhi">MeshiPhi</a>.</p>
+</li>
+<li>
+<p><strong>PolarRoute-server</strong><br />
+Once the meshes are available shipside they are ingested into an onboard database which allows them to be used to calculate optimised travel routes. These are calculated on demand and presented to the onboard user digitally. <a href="https://github.com/bas-amop/PolarRoute-server">PolarRoute-server</a> handles the onboard mesh ingestion and route calculation through a command-line or graphical user interface.</p>
+</li>
+<li>
+<p><strong>Sea-Ice-Information-System (SIIS)</strong><br />
+The <a href="https://gitlab.data.bas.ac.uk/MAGIC/SIIS">SIIS</a> front-end provides a graphical user interface whereby users can interact with Operational PolarRoute through a standard web browser.</p>
+</li>
+</ol>
+<p>From the three distinct components defined above, this documentation is concerned only with part (1.)  </p>
+<h2 id="basic-process-flow-diagram">Basic process flow diagram</h2>
+<p><img alt="Basic Process" src="/img/polarroute-basics.png" /></p>
+<h2 id="detailed-process-flow-diagram">Detailed process flow diagram</h2>
+<p><img alt="Operational PolarRoute Process" src="/img/pipeline_dfd.png" /></p>
+<h2 id="history">History</h2>
+<p>During 2024 the previous repository was manually ported from a hierarchy of bash and python scripts to an implementation using a workflow manager. The original scripts remained mostly unchanged although the introduction of the <a href="https://jug.readthedocs.io/en/latest/">Jug</a> parallelisation package allowed the scripts to execute with strict dependency, monitoring and pipeline control. This was initially achieved using a handbuilt workflow manager script <code>operational-polarroute.py</code>.  </p>
+<h3 id="september-2024-onwards">September 2024 onwards</h3>
+<p>The workflow manager concept was rebuilt as a separate and generic workflow manager forming the package <a href="https://github.com/antarctica/simple-action-pipeline">simple-action-pipeline</a>. PolarRoute-pipeline was then ported to being a configuration of <em>simple-action-pipeline</em>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../installation/" class="btn btn-neutral float-right" title="Installing the pipeline">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/bas-amop/PolarRoute-pipeline/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../installation/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

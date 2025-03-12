@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>How PolarRoute-pipeline works - PolarRoute-pipeline</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "How PolarRoute-pipeline works";
+        var mkdocs_page_input_path = "how-polarroute-pipeline-works.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> PolarRoute-pipeline
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../implementation/">Implementation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../installation/">Installing the pipeline</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../setting-up/">Setting up the pipeline</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../using/">Using the pipeline</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">How PolarRoute-pipeline works</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#the-workflow-manager">The workflow manager</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pipelineyaml">pipeline.yaml</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#applicationyaml">application.yaml</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#environment-variables">Environment variables</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#task-sequence">Task sequence</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#logs">Logs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#further-detail">Further detail</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../development/">Development</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">PolarRoute-pipeline</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">How PolarRoute-pipeline works</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/bas-amop/PolarRoute-pipeline/edit/master/docs/how-polarroute-pipeline-works.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="how-polarroute-pipeline-works">How PolarRoute-pipeline works</h1>
+<p><em>PolarRoute-pipeline</em> creates one or more meshes using up-to-date source datasets. These meshes can then have optimised routes calculated upon them with optimisations such as fuel or traveltime.  </p>
+<p>The logical flow of the pipeline is built from the <a href="https://github.com/bas-amop/PolarRoute-pipeline/raw/main/application.yaml">application.yaml</a> config file, which details what tasks are to be performed and their dependencies. The pipeline resolves these dependencies and allows tasks to run in parallel, depending how many <code>WORKERS</code> have been defined in the <a href="https://github.com/bas-amop/PolarRoute-pipeline/raw/main/pipeline.yaml">pipeline.yaml</a>.  </p>
+<p>If any task fails to complete successfully, it will raise an exception and prevent any future <strong>dependencies</strong> from executing.</p>
+<h2 id="the-workflow-manager">The workflow manager</h2>
+<p>The pipeline build command creates or re-creates from the <code>application.yaml</code> and <code>pipeline.yaml</code> a python script that is used by the <a href="https://github.com/luispedro/jug">Jug</a> parallelisation package. The pipeline invokes 'Jug' with this python script for each <code>WORKER</code>, creating one or more parallel processes that can complete multiple tasks which being monitored. This collection of python script, 'Jug' and <code>WORKERS</code> is referred to as the 'workflow-manager'.  </p>
+<p>Everything related to the workflow manager's operation is contained within the <code>&lt;pipeline&gt;/workflow-manager/</code> directory, which is created by the 'build' command.</p>
+<h2 id="pipelineyaml"><code>pipeline.yaml</code></h2>
+<p>This configuration file can be mostly left untouched other than the <code>MAXWORKERS</code> definition. The workflow manager will attempt to allocate <strong>up to</strong> this many workers to the pipeline.  </p>
+<blockquote>
+<p>Example:<br />
+<strong>| You have 10 tasks the <em>could</em> all execute in parallel.</strong><br />
+<strong>| You are using a platform that has 6 CPU threads.</strong><br />
+  * If you set <code>MAXWORKERS</code> to <code>2</code> the workflow manager will invoke 2 workers, meaning that the 2 CPU threads can complete all 10 tasks twice as quickly as if there was only 1 worker (i.e. 1 task done at a time).<br />
+  * If you set <code>MAXWORKERS</code> to <code>10</code> the workflow manager will invoke 10 workers but because this is more than available CPU threads there will be a significant amount of CPU context switching to achieve the effect of 10 CPU threads running. This results in slower performance.<br />
+  * If you set <code>MAXWORKERS</code> to <code>5</code> the workflow manager will invoke 5 workers, meaning that the 5 CPU threads can complete all 10 tasks five times as quickly as if there was only 1 worker (i.e. 1 task done at a time). This would also avoid CPU context switch and also leave 1 CPU thread free for the underlying platform.  </p>
+</blockquote>
+<h2 id="applicationyaml"><code>application.yaml</code></h2>
+<h3 id="environment-variables">Environment variables</h3>
+<p>If the pipeline relies upon constants held within environment variables, these can be pre-defined under the <code>env:variables:</code> section of the yaml config file.  </p>
+<p>Also note that the <code>PIPELINE_DIRECTORY</code> and <code>SCRIPTS_DIRECTORY</code> are mandatory for the pipeline to know where it is and where to look for the task scripts.  </p>
+<h3 id="task-sequence">Task sequence</h3>
+<p>The sequence order and dependancies of the tasks (scripts) are defined under the <code>sequence:</code> section of the yaml config file.  </p>
+<p>Each task (script) in the sequence has a <code>name:</code> and <code>depends:</code> field. The name is the name of the script to be found in the scripts directory. The depends can be either a single script name or a list of script names if there are multiple dependancies. If a script has no dependancy then the <code>depends:</code> field should contain an empty string <code>''</code>.  </p>
+<p><strong><em>Currently shell scripts <code>.sh</code> and python scripts <code>.py</code> are the only supported task (script) names.</em></strong> </p>
+<p>Inspect the <a href="https://github.com/bas-amop/PolarRoute-pipeline/raw/main/application.yaml">application.yaml</a> to show how the sequence of tasks can be constructed.  </p>
+<h2 id="logs">Logs</h2>
+<p>Logs of stderr and stdout are stored in <code>&lt;pipeline&gt;/logs/&lt;config_name&gt;_&lt;date&gt;.err</code> and <code>&lt;pipeline&gt;/logs/&lt;config_name&gt;_&lt;date&gt;.out</code> for debugging purposes.  </p>
+<h2 id="further-detail">Further detail</h2>
+<p>For more detail on the inner workings of the tasks PolarRoute-pipeline performs, please refer to the documentation for:<br />
+ - <a href="https://jug.readthedocs.io/en/latest/">Jug</a><br />
+ - <a href="https://antarctica.github.io/PolarRoute/">PolarRoute</a><br />
+ - <a href="https://antarctica.github.io/MeshiPhi/">MeshiPhi</a>  </p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../using/" class="btn btn-neutral float-left" title="Using the pipeline"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../development/" class="btn btn-neutral float-right" title="Development">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/bas-amop/PolarRoute-pipeline/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../using/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../development/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

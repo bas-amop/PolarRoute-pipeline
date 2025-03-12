@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Setting up the pipeline - PolarRoute-pipeline</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Setting up the pipeline";
+        var mkdocs_page_input_path = "setting-up.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> PolarRoute-pipeline
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../implementation/">Implementation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../installation/">Installing the pipeline</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Setting up the pipeline</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#setting-up-download-credentials">Setting up download credentials</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#era5">ERA5</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#copernicus-marine-api">Copernicus Marine API</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../using/">Using the pipeline</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../how-polarroute-pipeline-works/">How PolarRoute-pipeline works</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../development/">Development</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">PolarRoute-pipeline</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Setting up the pipeline</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/bas-amop/PolarRoute-pipeline/edit/master/docs/setting-up.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="setting-up-the-pipeline">Setting up the pipeline</h1>
+<p>Even before the pipeline can be built for the first time, there are a number of one-time setup steps required.</p>
+<ol>
+<li>
+<p>Assuming you have already created a Python virtual environment and cloned this repository into a directory on a HPC Workstation or Local PC, move into the 'root' of the repository.<br />
+<code>cd polarroute-pipeline</code>  </p>
+</li>
+<li>
+<p>Create symbolic links for the venv <strong>activation</strong> script, <strong>datastore</strong> (where downloaded data products are to be stored), <strong>logs</strong>,  <strong>outputs</strong> (where the generated outputs are to be stored), <strong>html</strong> (for the summary status page) and <strong>upload</strong> + <strong>push</strong> (where outputs are copied to be sent shipside).</p>
+<ul>
+<li><code>ln -s &lt;path-to-venv&gt;/bin/activate &lt;path-to-this-repo&gt;/activate</code></li>
+<li><code>ln -s &lt;path-to-datastore&gt; &lt;path-to-this-repo&gt;/datastore</code></li>
+<li><code>ln -s &lt;path-to-logs-directory&gt; &lt;path-to-this-repo&gt;/logs</code></li>
+<li><code>ln -s &lt;path-to-output-archive&gt; &lt;path-to-this-repo&gt;/outputs</code></li>
+<li><code>ln -s &lt;path-to-upload-directory&gt; &lt;path-to-this-repo&gt;/upload</code></li>
+<li><code>ln -s &lt;path-to-push-directory&gt; &lt;path-to-this-repo&gt;/push</code></li>
+<li><code>ln -s &lt;path-to-html-directory&gt; &lt;path-to-this-repo&gt;/html</code>  </li>
+</ul>
+</li>
+</ol>
+<p>The links created above are specific to PolarRoute-pipeline as various data products are stored in differen't remote or local directories. If you are setting up a completely local instance of PolarRoute-pipeline then you could just create local folders within the pipeline directory, instead of links to external locations. Below is an explanation of why each link/directory is required:  </p>
+<table>
+<thead>
+<tr>
+<th>Directory or Link</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;pipeline&gt;/activate</code></td>
+<td>So the pipeline knows which activation script to use</td>
+</tr>
+<tr>
+<td><code>&lt;pipeline&gt;/datastore</code></td>
+<td>Where to store and retrieve downloaded source datasets</td>
+</tr>
+<tr>
+<td><code>&lt;pipeline&gt;/logs</code></td>
+<td>Where to keep any log files</td>
+</tr>
+<tr>
+<td><code>&lt;pipeline&gt;/outputs</code></td>
+<td>Where to store and retrieve daily pipeline output products</td>
+</tr>
+<tr>
+<td><code>&lt;pipeline&gt;/upload</code></td>
+<td>Where to 'prepare' specific outputs before being sent</td>
+</tr>
+<tr>
+<td><code>&lt;pipeline&gt;/push</code></td>
+<td>Where to place any outputs to be sent. Specifically, the pipeline copies output products from the <code>upload</code> directory into the <code>push</code> directory. These are then picked up by an external synchronisation system which 'pulls' the products and automatically removes them from the <code>push</code> directory afterwards</td>
+</tr>
+<tr>
+<td><code>&lt;pipeline&gt;/html</code></td>
+<td>Where the pipeline publishes a static html summary page</td>
+</tr>
+</tbody>
+</table>
+<h2 id="setting-up-download-credentials">Setting up download credentials</h2>
+<p>PolarRoute-pipeline will need to use valid credentials to download ERA5 and DUACS products, ensure you have these set up as detailed below:</p>
+<h3 id="era5">ERA5</h3>
+<p>The ERA5 downloader scripts make use of the CDS API (via the cdsapi python package) and require you to create a .cdsapirc file in your home directory ($HOME/.cdsapirc) containing a valid url and key for the API as described here: https://cds.climate.copernicus.eu/api-how-to  </p>
+<p>From a shell:</p>
+<pre><code class="language-bash">echo url: https://cds-beta.climate.copernicus.eu/api &gt; $HOME/.cdsapirc
+echo key: &lt;your-unique-api-key&gt; &gt;&gt; $HOME/.cdsapirc
+echo verify:0 &gt;&gt; $HOME/.cdsapirc
+</code></pre>
+<h3 id="copernicus-marine-api">Copernicus Marine API</h3>
+<p>The Copernicus API to is used to download up-to-date DUACS currents data. This service requires obtaining a USERNAME and PASSWORD for logging in. Once you have the username and password they can be stored separately to the pipeline in the user's <code>HOME</code> directory. You can register on the <a href="https://data.marine.copernicus.eu/register">Copernicus Marine API Registration</a> page.</p>
+<pre><code class="language-bash">mkdir -p $HOME/.copernicusmarine
+echo &lt;your-unique-username&gt; &gt; $HOME/.copernicusmarine/user
+echo &lt;your-unique-password&gt; &gt; $HOME/.copernicusmarine/password
+</code></pre>
+<ul>
+<li>The above commands will create the required credentials files. If you wish to remove the details of these commands in your shell's history, you can perform the following:  </li>
+<li>Logout <em>(this will flush your shell history to ~/.bash_history)</em></li>
+<li>Login</li>
+<li><code>cat /dev/null &gt; ~/.bash_history</code> <em>(this will erase all of your bash history)</em></li>
+</ul>
+<p>Now that everything is set up, the <em>PolarRoute-pipeline</em> can be used. Please refer to the <a href="../using/">Using the pipeline</a> section of this documentation for details of how to operate the pipeline.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../installation/" class="btn btn-neutral float-left" title="Installing the pipeline"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../using/" class="btn btn-neutral float-right" title="Using the pipeline">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/bas-amop/PolarRoute-pipeline/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../installation/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../using/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
