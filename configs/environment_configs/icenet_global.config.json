@@ -1,0 +1,139 @@
+{
+    "region": {
+        "lat_min": -85,
+        "lat_max": 85,
+        "long_min": -180,
+        "long_max": 180,
+        "start_time": "TODAY",
+        "end_time": "TODAY + 2",
+        "cell_width": 180,
+        "cell_height": 85
+    },
+    "data_sources": [
+        {
+            "loader": "GEBCO",
+            "params": {
+                "file": "datastore/bathymetry/gebco/gebco_global.nc",
+                "data_name": "elevation",
+                "value_fill_types": "parent",
+                "aggregate_type": "MAX",
+                "splitting_conditions": [
+                    {
+                        "elevation": {
+                            "threshold": -10,
+                            "upper_bound": 1,
+                            "lower_bound": 0,
+                            "split_lock": true
+                        }
+                    },
+                    {
+                        "elevation": {
+                            "threshold": -100,
+                            "upper_bound": 0.9,
+                            "lower_bound": 0.1
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "loader": "icenet",
+            "params": {
+                "folder": "datastore/sic/icenet/south/",
+                "value_fill_types": "parent",
+                "data_name": "SIC",
+                "splitting_conditions": [
+                    {
+                        "SIC": {
+                            "threshold": 80,
+                            "upper_bound": 1,
+                            "lower_bound": 0,
+                            "split_lock": true
+                        }
+                    },
+                    {
+                        "SIC": {
+                            "threshold": 35,
+                            "upper_bound": 1.0,
+                            "lower_bound": 0.0
+                        }
+                    },
+                    {
+                        "SIC": {
+                            "threshold": 1,
+                            "upper_bound": 1,
+                            "lower_bound": 0
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "loader": "icenet",
+            "params": {
+                "folder": "datastore/sic/icenet/north/",
+                "value_fill_types": "parent",
+                "data_name": "SIC",
+                "splitting_conditions": [
+                    {
+                        "SIC": {
+                            "threshold": 80,
+                            "upper_bound": 1,
+                            "lower_bound": 0,
+                            "split_lock": true
+                        }
+                    },
+                    {
+                        "SIC": {
+                            "threshold": 35,
+                            "upper_bound": 1.0,
+                            "lower_bound": 0.0
+                        }
+                    },
+                    {
+                        "SIC": {
+                            "threshold": 1,
+                            "upper_bound": 1,
+                            "lower_bound": 0
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "loader": "sose",
+            "params": {
+                "file": "datastore/currents/sose/SOSE_surface_velocity_6yearMean_2005-2010.nc",
+                "value_fill_types": "parent",
+                "data_name": "uC,vC",
+                "splitting_conditions": [
+                    {
+                        "uC,vC": {
+                            "curl": 0.05
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "loader": "thickness",
+            "params": {
+                "data_name": "thickness",
+                "file": "",
+                "value_fill_types": "parent"
+            }
+        },
+        {
+            "loader": "density",
+            "params": {
+                "data_name": "density",
+                "file": "",
+                "value_fill_types": "parent"
+            }
+        }
+    ],
+    "splitting": {
+        "split_depth": 8,
+        "minimum_datapoints": 5
+    }
+}

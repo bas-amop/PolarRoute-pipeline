@@ -1,0 +1,17 @@
+site_name: PolarRoute-pipeline
+repo_url: https://github.com/bas-amop/PolarRoute-pipeline/
+theme: readthedocs
+plugins: 
+  - search
+  - mkdocstrings
+  - include-markdown:
+      rewrite_relative_urls: true
+
+nav:
+  - Home: index.md
+  - implementation.md
+  - installation.md
+  - setting-up.md
+  - using.md
+  - how-polarroute-pipeline-works.md
+  - development.md
