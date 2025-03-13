@@ -1,0 +1,31 @@
+# Ignore everything
+configs/waypoints.csv
+html/index.html
+logs/*
+inputs/*
+outputs/*
+
+# Ignore workflow manager
+/workflow-manager/
+/wfmanager/recent.operational-polarroute/
+/wfmanager/*.log
+
+# Except folders
+!logs/.gitkeep
+!inputs/.gitkeep
+!outputs/.gitkeep
+
+# Ignore Symlinks
+datastore
+activate
+outputs
+upload
+push
+logs
+html
+
+# Ignore all env files except the example
+*.env
+
+# IDE things
+.vscode/*
