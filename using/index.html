@@ -137,7 +137,7 @@ pipeline status &lt;path-to-this-pipeline-directory&gt; --short
 </code></pre>
 <hr />
 <h2 id="reset-the-pipeline-reset">Reset the pipeline <code>reset</code></h2>
-<p>Because the statefulness of the pipeline persists even after completion, an additional step is required before the pipeline can be executed again. This is called a <code>reset</code> and when initiated, the workflow manager erases the state of the pipeline ready for re-execution.  </p>
+<p>Because the statefulness of the pipeline persists even after completion, an additional step is required before the pipeline can be executed again. This is called a <code>reset</code>, and when initiated, the workflow manager erases the state of the pipeline ready for re-execution.  </p>
 <p>A reset can be performed by running the command:</p>
 <pre><code class="language-bash">pipeline reset &lt;path-to-this-pipeline-directory&gt;
 </code></pre>
@@ -168,7 +168,7 @@ pipeline status &lt;path-to-this-pipeline-directory&gt; --short
 <p>Using any of the pipeline commands <strong>does not</strong> require sourcing of the pipeline's <code>pipeline.env</code> and <code>application.env</code> files beforehand, this is automatically handled by the pipeline.  </p>
 </li>
 <li>
-<p>Running the pipeline command from inside a pipeline directory does not require specifying the <code>&lt;path-to-pipeline-directory&gt;</code> argument. When this argument is missing, the pipeline assumes the use of the current working directory. For instance, if you are inside the pipeline directory, you can simple issue the command <code>pipeline status</code> to get the current status.</p>
+<p>Running the pipeline command from inside a pipeline directory does not require specifying the <code>&lt;path-to-pipeline-directory&gt;</code> argument. When this argument is missing, the pipeline assumes the use of the current working directory. For instance, if you are inside the pipeline directory, you can simply issue the command <code>pipeline status</code> to get the current status.</p>
 </li>
 </ul>
               
