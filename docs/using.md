@@ -35,7 +35,7 @@ pipeline execute <path-to-this-pipeline-directory>
 ``` 
 ---
 ## Reset the pipeline `reset`
-Because the statefulness of the pipeline persists even after completion, an additional step is required before the pipeline can be executed again. This is called a `reset` and when initiated, the workflow manager erases the state of the pipeline ready for re-execution.  
+Because the statefulness of the pipeline persists even after completion, an additional step is required before the pipeline can be executed again. This is called a `reset`, and when initiated, the workflow manager erases the state of the pipeline ready for re-execution.  
 
 A reset can be performed by running the command:
 ```bash
@@ -62,4 +62,4 @@ Following a 'halt' there are two possible choices:
 ## Tips
 - Using any of the pipeline commands **does not** require sourcing of the pipeline's `pipeline.env` and `application.env` files beforehand, this is automatically handled by the pipeline.  
   
-- Running the pipeline command from inside a pipeline directory does not require specifying the `<path-to-pipeline-directory>` argument. When this argument is missing, the pipeline assumes the use of the current working directory. For instance, if you are inside the pipeline directory, you can simple issue the command `pipeline status` to get the current status.
+- Running the pipeline command from inside a pipeline directory does not require specifying the `<path-to-pipeline-directory>` argument. When this argument is missing, the pipeline assumes the use of the current working directory. For instance, if you are inside the pipeline directory, you can simply issue the command `pipeline status` to get the current status.
