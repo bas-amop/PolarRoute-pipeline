@@ -56,7 +56,7 @@ Now that everything is set up, the *PolarRoute-pipeline* can be used. Please ref
 ### GEBCO Bathymetry data
 If you are running the pipeline locally, and do not have access to the BAS 
 infrastructure (specifically the SAN), you can use the following script to
-download and set up the [GEBRO gridded bathymetry data](https://www.gebco.net/data-products/gridded-bathymetry-data):
+download and set up the [GEBCO gridded bathymetry data](https://www.gebco.net/data-products/gridded-bathymetry-data):
 
 ```shell
 mkdir -p datastore/bathymetry/gebco && cd &_
