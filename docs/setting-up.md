@@ -52,3 +52,28 @@ echo <your-unique-password> > $HOME/.copernicusmarine/password
    1. ` cat /dev/null > ~/.bash_history ` *(this will erase all of your bash history)*
 
 Now that everything is set up, the *PolarRoute-pipeline* can be used. Please refer to the [Using the pipeline](using.md) section of this documentation for details of how to operate the pipeline.
+
+### GEBCO Bathymetry data
+If you are running the pipeline locally, and do not have access to the BAS 
+infrastructure (specifically the SAN), you can use the following script to
+download and set up the [GEBRO gridded bathymetry data](https://www.gebco.net/data-products/gridded-bathymetry-data):
+
+```shell
+mkdir -p datastore/bathymetry/gebco && cd &_
+
+# Make a request using wget - this can take a while to download
+# Take note of the year here, newer versions may be available
+wget https://www.bodc.ac.uk/data/open_download/gebco/gebco_2024/zip/
+
+# This will download the file as an .html, but it is in fact a zipfile
+mv index.html gebco.zip
+unzip gebco.zip
+mv GEBCO_2024.nc gebco_global.nc
+
+# Clean up, remove any unnecessary files
+rm gebco.zip
+rm *.pdf
+```
+
+This is a large and static dataset, therefore you should only need to run this 
+once.
