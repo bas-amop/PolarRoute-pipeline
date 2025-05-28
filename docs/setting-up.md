@@ -62,6 +62,7 @@ download and set up the [GEBCO gridded bathymetry data](https://www.gebco.net/da
 mkdir -p datastore/bathymetry/gebco && cd &_
 
 # Make a request using wget - this can take a while to download
+# as this bathymetry model can be greater than 7GB in size.
 # Take note of the year here, newer versions may be available
 wget https://www.bodc.ac.uk/data/open_download/gebco/gebco_2024/zip/
 
