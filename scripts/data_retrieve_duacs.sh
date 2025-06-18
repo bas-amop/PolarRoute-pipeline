@@ -18,19 +18,11 @@ pipeline_directory=$PIPELINE_DIRECTORY
 # Determine the scripts directory
 scripts_directory=$pipeline_directory/scripts
 
-# Get hold of credentials if they exist
-if [ -f "$pipeline_directory/credentials.env" ]; then
-    source $pipeline_directory/credentials.env
-else
-    echo "ERROR - No Credentials Found"
-    exit 1
-fi
-
 # Where to put output files
 save_directory=$pipeline_directory/datastore/currents/duacs-nrt/global/
 
 # Create the output dir if it doesn't exist
-mkdir -p $save_directory
+mkdir -p "$save_directory"
 
 # Date for file formatting
 current_date=$(date --utc +%Y-%m-%d)
@@ -39,27 +31,25 @@ current_date=$(date --utc +%Y-%m-%d)
 for ((i = 0; i <= 3; i++)); do
     originaldate=$(date -d "$current_date -$i days" +%Y%m%d)
     date=$(date -d "$current_date -$i days" +%Y-%m-%d)
-    echo ${date}
+    echo "${date}"
     originalfilename="$save_directory/nrt_global_allsat_phy_l4_${originaldate}_${originaldate}.nc"
     filename="$save_directory/duacs_nrt_${date}.nc"
 
     # Only download if not present in the datastore
     if (test -f "$originalfilename") || (test -f "$filename"); then
-        echo "$(basename $filename) or $(basename $originalfilename) already exists!"
+        echo "$(basename "$filename") or $(basename "$originalfilename") already exists!"
     else
         # Download the data
         if ! copernicusmarine get \
             --dataset-id cmems_obs-sl_glo_phy-ssh_nrt_allsat-l4-duacs-0.125deg_P1D \
             --filter "*nrt_global_allsat_phy_l4_${originaldate}*" \
-            --output-directory $save_directory \
-            --username $COPERNICUS_USER \
-            --password $COPERNICUS_PASSWORD \
+            --output-directory "$save_directory" \
             --no-directories \
             --disable-progress-bar \
             --response-fields "file_path" \
             --log-level INFO
         then
-            echo DUACS global data file not found: ${filename}
+            echo DUACS global data file not found: "${filename}"
         fi
     fi
 done
@@ -67,9 +57,3 @@ done
 # Subset any downloaded original DUACS NetCDF files
 python $scripts_directory/data_subset_duacs.py
 
-# Remove credentials if they exist
-if [ -f "$pipeline_directory/credentials.env" ]; then
-    rm $pipeline_directory/credentials.env
-else
-    echo "No Credentials File to Remove"
-fi
