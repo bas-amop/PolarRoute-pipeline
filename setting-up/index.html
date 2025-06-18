@@ -189,15 +189,13 @@ echo &lt;your-unique-password&gt; &gt; $HOME/.copernicusmarine/password
 <p>If you are running the pipeline locally, and do not have access to the BAS 
 infrastructure (specifically the SAN), you can use the following script to
 download and set up the <a href="https://www.gebco.net/data-products/gridded-bathymetry-data">GEBCO gridded bathymetry data</a>:</p>
-<pre><code class="language-shell">mkdir -p datastore/bathymetry/gebco &amp;&amp; cd &amp;_
+<pre><code class="language-shell">mkdir -p datastore/bathymetry/gebco &amp;&amp; cd $_
 
 # Make a request using wget - this can take a while to download
 # as this bathymetry model can be greater than 7GB in size.
 # Take note of the year here, newer versions may be available
-wget https://www.bodc.ac.uk/data/open_download/gebco/gebco_2024/zip/
+wget -O gebco.zip https://www.bodc.ac.uk/data/open_download/gebco/gebco_2024/zip/
 
-# This will download the file as an .html, but it is in fact a zipfile
-mv index.html gebco.zip
 unzip gebco.zip
 mv GEBCO_2024.nc gebco_global.nc
 
@@ -205,8 +203,7 @@ mv GEBCO_2024.nc gebco_global.nc
 rm gebco.zip
 rm *.pdf
 </code></pre>
-<p>This is a large and static dataset, therefore you should only need to run this 
-once.</p>
+<p>This is a large and static dataset, therefore you should only need to run this once.</p>
               
             </div>
           </div><footer>
