@@ -1,10 +1,3 @@
-polar-route==1.0.0
-cdsapi
-copernicusmarine==2.0.0
-bas-geoplot
-sap @ git+https://github.com/antarctica/simple-action-pipeline@main
-py-meshiphi-geojson2png @ git+https://github.com/matscorse/py-meshiphi-geojson2png.git
-
 mkdocs
 mkdocs-include-markdown-plugin
 mkdocstrings[python]
