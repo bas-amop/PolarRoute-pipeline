@@ -41,11 +41,13 @@ echo verify:0 >> $HOME/.cdsapirc
 
 ### Copernicus Marine API
 The Copernicus API to is used to download up-to-date DUACS currents data. This service requires obtaining a USERNAME and PASSWORD for logging in. Once you have the username and password they can be stored separately to the pipeline in the user's `HOME` directory. You can register on the [Copernicus Marine API Registration](https://data.marine.copernicus.eu/register) page. Then, use the `copernicusmarine` command line tool to log in and set up your credentials file. First make sure that your python virtual environment is activated and you have installed the dependencies. Then:
+
 ``` bash
 copernicusmarine login
 # you will be prompted for your username and password and your credentials will be stored in a file at $HOME/.copernicusmarine/.copernicusmarine-credentials
 ```
 
+Alternativey, Copernicus Marine credentials can be set using environment variables `COPERNICUSMARINE_SERVICE_USERNAME` and `COPERNICUSMARINE_SERVICE_PASSWORD` - these will be used in preference to the credentials file.
 
 Now that everything is set up, the *PolarRoute-pipeline* can be used. Please refer to the [Using the pipeline](using.md) section of this documentation for details of how to operate the pipeline.
 
