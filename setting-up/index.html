@@ -61,6 +61,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#copernicus-marine-api">Copernicus Marine API</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gebco-bathymetry-data">GEBCO Bathymetry data</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -183,6 +185,28 @@ echo &lt;your-unique-password&gt; &gt; $HOME/.copernicusmarine/password
 <li><code>cat /dev/null &gt; ~/.bash_history</code> <em>(this will erase all of your bash history)</em></li>
 </ul>
 <p>Now that everything is set up, the <em>PolarRoute-pipeline</em> can be used. Please refer to the <a href="../using/">Using the pipeline</a> section of this documentation for details of how to operate the pipeline.</p>
+<h3 id="gebco-bathymetry-data">GEBCO Bathymetry data</h3>
+<p>If you are running the pipeline locally, and do not have access to the BAS 
+infrastructure (specifically the SAN), you can use the following script to
+download and set up the <a href="https://www.gebco.net/data-products/gridded-bathymetry-data">GEBCO gridded bathymetry data</a>:</p>
+<pre><code class="language-shell">mkdir -p datastore/bathymetry/gebco &amp;&amp; cd &amp;_
+
+# Make a request using wget - this can take a while to download
+# as this bathymetry model can be greater than 7GB in size.
+# Take note of the year here, newer versions may be available
+wget https://www.bodc.ac.uk/data/open_download/gebco/gebco_2024/zip/
+
+# This will download the file as an .html, but it is in fact a zipfile
+mv index.html gebco.zip
+unzip gebco.zip
+mv GEBCO_2024.nc gebco_global.nc
+
+# Clean up, remove any unnecessary files
+rm gebco.zip
+rm *.pdf
+</code></pre>
+<p>This is a large and static dataset, therefore you should only need to run this 
+once.</p>
               
             </div>
           </div><footer>

@@ -106,13 +106,16 @@
 <hr />
 <ol>
 <li>Clone the repository and create and activate a python virtual environment of your choice.</li>
-<li>Inside a virtual environment or machine: <code>python -m pip install -r requirements-docs.txt</code></li>
+<li>Inside a virtual environment or machine: <code>python -m pip install -r requirements.txt</code></li>
 </ol>
 <h2 id="releaseversioning">Release/Versioning</h2>
 <p>Version numbers should be used in tagging commits on the <code>main</code> branch and should be of the form <code>v0.1.7</code> using the semantic versioning convention.</p>
 <h2 id="building-deploying-the-documentation">Building &amp; deploying the documentation</h2>
-<p>Run <code>mkdocs build</code> to build the docs.</p>
-<p>Then run <code>mkdocs gh-deploy</code> to deploy to the <code>gh-pages</code> branch of the repository. You must have write access to the repo.</p>
+<p>The documentation should build automatically on pushes to <code>main</code> using GitHub actions, if you want to build and deploy the docs manually, follow these steps:</p>
+<ul>
+<li>Run <code>make build-docs</code> to build the docs to the <code>./site</code> directory.</li>
+<li>Then run <code>make deploy-docs</code> to deploy to the <code>gh-pages</code> branch of the repository. You must have write access to the repo.</li>
+</ul>
               
             </div>
           </div><footer>
