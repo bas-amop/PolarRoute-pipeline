@@ -40,16 +40,14 @@ echo verify:0 >> $HOME/.cdsapirc
 ```
 
 ### Copernicus Marine API
-The Copernicus API to is used to download up-to-date DUACS currents data. This service requires obtaining a USERNAME and PASSWORD for logging in. Once you have the username and password they can be stored separately to the pipeline in the user's `HOME` directory. You can register on the [Copernicus Marine API Registration](https://data.marine.copernicus.eu/register) page.
+The Copernicus API to is used to download up-to-date DUACS currents data. This service requires obtaining a USERNAME and PASSWORD for logging in. Once you have the username and password they can be stored separately to the pipeline in the user's `HOME` directory. You can register on the [Copernicus Marine API Registration](https://data.marine.copernicus.eu/register) page. Then, use the `copernicusmarine` command line tool to log in and set up your credentials file. First make sure that your python virtual environment is activated and you have installed the dependencies. Then:
+
 ``` bash
-mkdir -p $HOME/.copernicusmarine
-echo <your-unique-username> > $HOME/.copernicusmarine/user
-echo <your-unique-password> > $HOME/.copernicusmarine/password
+copernicusmarine login
+# you will be prompted for your username and password and your credentials will be stored in a file at $HOME/.copernicusmarine/.copernicusmarine-credentials
 ```
- - The above commands will create the required credentials files. If you wish to remove the details of these commands in your shell's history, you can perform the following:  
-   1. Logout *(this will flush your shell history to ~/.bash_history)*
-   1. Login
-   1. ` cat /dev/null > ~/.bash_history ` *(this will erase all of your bash history)*
+
+Alternativey, Copernicus Marine credentials can be set using environment variables `COPERNICUSMARINE_SERVICE_USERNAME` and `COPERNICUSMARINE_SERVICE_PASSWORD` - these will be used in preference to the credentials file.
 
 Now that everything is set up, the *PolarRoute-pipeline* can be used. Please refer to the [Using the pipeline](using.md) section of this documentation for details of how to operate the pipeline.
 
