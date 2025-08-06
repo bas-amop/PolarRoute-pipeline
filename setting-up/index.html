@@ -173,17 +173,11 @@ echo key: &lt;your-unique-api-key&gt; &gt;&gt; $HOME/.cdsapirc
 echo verify:0 &gt;&gt; $HOME/.cdsapirc
 </code></pre>
 <h3 id="copernicus-marine-api">Copernicus Marine API</h3>
-<p>The Copernicus API to is used to download up-to-date DUACS currents data. This service requires obtaining a USERNAME and PASSWORD for logging in. Once you have the username and password they can be stored separately to the pipeline in the user's <code>HOME</code> directory. You can register on the <a href="https://data.marine.copernicus.eu/register">Copernicus Marine API Registration</a> page.</p>
-<pre><code class="language-bash">mkdir -p $HOME/.copernicusmarine
-echo &lt;your-unique-username&gt; &gt; $HOME/.copernicusmarine/user
-echo &lt;your-unique-password&gt; &gt; $HOME/.copernicusmarine/password
+<p>The Copernicus API to is used to download up-to-date DUACS currents data. This service requires obtaining a USERNAME and PASSWORD for logging in. Once you have the username and password they can be stored separately to the pipeline in the user's <code>HOME</code> directory. You can register on the <a href="https://data.marine.copernicus.eu/register">Copernicus Marine API Registration</a> page. Then, use the <code>copernicusmarine</code> command line tool to log in and set up your credentials file. First make sure that your python virtual environment is activated and you have installed the dependencies. Then:</p>
+<pre><code class="language-bash">copernicusmarine login
+# you will be prompted for your username and password and your credentials will be stored in a file at $HOME/.copernicusmarine/.copernicusmarine-credentials
 </code></pre>
-<ul>
-<li>The above commands will create the required credentials files. If you wish to remove the details of these commands in your shell's history, you can perform the following:  </li>
-<li>Logout <em>(this will flush your shell history to ~/.bash_history)</em></li>
-<li>Login</li>
-<li><code>cat /dev/null &gt; ~/.bash_history</code> <em>(this will erase all of your bash history)</em></li>
-</ul>
+<p>Alternativey, Copernicus Marine credentials can be set using environment variables <code>COPERNICUSMARINE_SERVICE_USERNAME</code> and <code>COPERNICUSMARINE_SERVICE_PASSWORD</code> - these will be used in preference to the credentials file.</p>
 <p>Now that everything is set up, the <em>PolarRoute-pipeline</em> can be used. Please refer to the <a href="../using/">Using the pipeline</a> section of this documentation for details of how to operate the pipeline.</p>
 <h3 id="gebco-bathymetry-data">GEBCO Bathymetry data</h3>
 <p>If you are running the pipeline locally, and do not have access to the BAS 
