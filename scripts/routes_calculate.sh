@@ -44,5 +44,6 @@ optimise_routes -v ${route_config} ${output_directory}/${mesh_name}_${vessel_nam
 cp ${output_directory}/${mesh_name}_${vessel_name}_${route_name}.route.json \
    ${pipeline_directory}/outputs/most_recent/${mesh_name}_${vessel_name}_${route_name}.route.json
 
-cp ${output_directory}/${mesh_name}_${vessel_name}_${route_name}.route.geojson \
-   ${pipeline_directory}/outputs/most_recent/${mesh_name}_${vessel_name}_${route_name}.route.geojson
+# disabled
+# cp ${output_directory}/${mesh_name}_${vessel_name}_${route_name}.route.geojson \
+#    ${pipeline_directory}/outputs/most_recent/${mesh_name}_${vessel_name}_${route_name}.route.geojson

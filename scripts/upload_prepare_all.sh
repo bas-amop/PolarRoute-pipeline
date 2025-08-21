@@ -12,7 +12,8 @@ sleep 5
 
 # Detect all of the .json.gz and .geojson.gz files in the most_recent directory
 # and determine their plain region names.
-region_files=($(ls $most_recent_directory/*.{geojson.gz,json.gz}))
+# region_files=($(ls $most_recent_directory/*.{geojson.gz,json.gz}))
+region_files=($(ls $most_recent_directory/*.json.gz))
 geojson_regions=()
 json_regions=()
 for region in "${region_files[@]}"

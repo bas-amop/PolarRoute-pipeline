@@ -34,6 +34,6 @@ fi
 
 # Copy files to correct directory dependant on file type
 find $upload_directory/ -name "*.json.gz" -exec cp {} ${push_directory}/${siis_MEVJ_dir}/ \;
-find $upload_directory/ -name "*.geojson.gz" -exec cp {} $push_directory/$siis_MEVG_dir/ \;
+# find $upload_directory/ -name "*.geojson.gz" -exec cp {} $push_directory/$siis_MEVG_dir/ \;
 find $upload_directory/ -name "*.yaml.gz" -exec cp {} $push_directory/$siis_OPRM_dir/ \;
 find $upload_directory/ -name "*.json" -exec cp {} $push_directory/$siis_metadata_dir/ \;
