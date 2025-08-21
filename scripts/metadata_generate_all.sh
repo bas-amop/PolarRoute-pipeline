@@ -43,13 +43,14 @@ all_files_list=""
 # For geojson regions add files
 for region in "${geojson_regions[@]}"
 do
-    all_files_list=${all_files_list}" ${pipeline_directory}/outputs/most_recent/amsr_${region}_${vessel}.vessel.geojson"
+    all_files_list=${all_files_list}" ${pipeline_directory}/outputs/most_recent/amsr_${region}_${vessel}.vessel.geojson" # add vessel mesh geojson
 done
 
 # For json regions add files
 for region in "${json_regions[@]}"
 do
-    all_files_list=${all_files_list}" ${pipeline_directory}/outputs/most_recent/amsr_${region}_${vessel}.vessel.json"
+    all_files_list=${all_files_list}" ${pipeline_directory}/outputs/most_recent/amsr_${region}.mesh.json" # add environment meshes
+    all_files_list=${all_files_list}" ${pipeline_directory}/outputs/most_recent/amsr_${region}_${vessel}.vessel.json" # add vessel meshes
 done
 
 python $scripts_directory/$script $options $all_files_list

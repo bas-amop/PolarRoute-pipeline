@@ -51,6 +51,7 @@ done
 # For json regions add files
 for region in "${json_regions[@]}"
 do
+    all_files_list=${all_files_list}" amsr_${region}.mesh.json.gz"
     all_files_list=${all_files_list}" amsr_${region}_${vessel}.vessel.json.gz"
 done
 
