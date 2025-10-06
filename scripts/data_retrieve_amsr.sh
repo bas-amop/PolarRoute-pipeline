@@ -31,14 +31,14 @@ for ((i = 1; i <= 3; i++)); do
 	year=$(date -d "$current_date -$i days" +%Y)
 	
 	# Set source of files to retrieve
-	north_file="data.seaice.uni-bremen.de/amsr2/asi_daygrid_swath/n6250/netcdf/${year}/asi-AMSR2-n6250-${date}-v5.4.nc"
-	south_file="data.seaice.uni-bremen.de/amsr2/asi_daygrid_swath/s6250/netcdf/${year}/asi-AMSR2-s6250-${date}-v5.4.nc"
+	north_file="https://seaice.uni-bremen.de/data/amsr2/asi_daygrid_swath/n6250/netcdf/${year}/asi-AMSR2-n6250-${date}-v5.4.nc"
+	south_file="https://seaice.uni-bremen.de/data/amsr2/asi_daygrid_swath/s6250/netcdf/${year}/asi-AMSR2-s6250-${date}-v5.4.nc"
 
 	# Retrieve the files
-	if ! wget -r -nv -nc -nd -np -nH -e --tries=${retries} --timeout=${timeout} robots=off "${north_file}" -P $save_directory/north/ &> /dev/null; then
+	if ! wget -r -nv -nc -nd -np -nH --tries=${retries} --timeout=${timeout} -e robots=off "${north_file}" -P $save_directory/north/ &> /dev/null; then
 		echo AMSRv2 north data file not found: ${north_file}
 	fi
-	if ! wget -r -nv -nc -nd -np -nH -e --tries=${retries} --timeout=${timeout} robots=off "${south_file}" -P $save_directory/south/ &> /dev/null; then
+	if ! wget -r -nv -nc -nd -np -nH --tries=${retries} --timeout=${timeout} -e robots=off "${south_file}" -P $save_directory/south/ &> /dev/null; then
 		echo AMSRv2 south data file not found: ${south_file}
 	fi
 	
