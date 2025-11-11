@@ -24,7 +24,7 @@ log_directory="${pipeline_directory}/logs"
 
 # Create the mesh
 echo "Generating $mesh_name mesh"
-create_mesh -v ${mesh_config} -o ${output_directory}/${mesh_name}/${date}/${output_name} \
+create_mesh ${mesh_config} -o ${output_directory}/${mesh_name}/${date}/${output_name} \
             >> ${log_directory}/${mesh_name}_${date}.out \
             2>> ${log_directory}/${mesh_name}_${date}.err
 
