@@ -35,7 +35,7 @@ log_directory="${pipeline_directory}/logs/${mesh_name}_${date}"
 
 # Construct Route and output a route GeoJSON and mesh
 echo "Constructing $route_name optimised route for $vessel_name in $mesh_name"
-optimise_routes -v ${route_config} ${output_directory}/${mesh_name}_${vessel_name}.vessel.json ${waypoints} \
+optimise_routes ${route_config} ${output_directory}/${mesh_name}_${vessel_name}.vessel.json ${waypoints} \
                 -p -o ${output_directory}/${mesh_name}_${vessel_name}_${route_name}.route.json \
                 >> ${log_directory}.out \
                 2>>${log_directory}.err

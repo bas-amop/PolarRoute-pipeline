@@ -1,4 +1,4 @@
-polar-route==1.0.0
+polar-route @ git+https://github.com/antarctica/PolarRoute.git
 cdsapi
 copernicusmarine==2.0.0
 bas-geoplot
