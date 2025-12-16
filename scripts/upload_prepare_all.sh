@@ -17,7 +17,15 @@ geojson_regions=()
 json_regions=()
 for region in "${region_files[@]}"
 do
-    end_trim=${region#${most_recent_directory}/amsr_}
+    # Handle both amsr_ and dicenet_ prefixes
+    if [[ ${region} == *amsr_* ]]; then
+        end_trim=${region#${most_recent_directory}/amsr_}
+    elif [[ ${region} == *dicenet_* ]]; then
+        end_trim=${region#${most_recent_directory}/dicenet_}
+    else
+        continue
+    fi
+    
     region_vessel=$(echo ${end_trim} | cut -d. -f1)
     plain_region=${region_vessel%_SDA*}
     if [ ${region##*geojson.} = 'gz' ] ; then
@@ -46,6 +54,7 @@ all_files_list="upload_metadata.yaml.gz"
 for region in "${geojson_regions[@]}"
 do
     all_files_list=${all_files_list}" amsr_${region}_${vessel}.vessel.geojson.gz"
+    all_files_list=${all_files_list}" dicenet_${region}_${vessel}.vessel.geojson.gz"
 done
 
 # For json regions add files
@@ -53,6 +62,8 @@ for region in "${json_regions[@]}"
 do
     all_files_list=${all_files_list}" amsr_${region}.mesh.json.gz"
     all_files_list=${all_files_list}" amsr_${region}_${vessel}.vessel.json.gz"
+    all_files_list=${all_files_list}" dicenet_${region}.mesh.json.gz"
+    all_files_list=${all_files_list}" dicenet_${region}_${vessel}.vessel.json.gz"
 done
 
 

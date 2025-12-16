@@ -12,6 +12,6 @@ pipeline:
 
         variables:
         - PIPELINE_DIRECTORY: "./"
-        - PIPELINE_MAXWORKERS: 4
+        - PIPELINE_MAXWORKERS: 2
     
     python-env: "./activate"
