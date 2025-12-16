@@ -37,7 +37,7 @@
             }
         },
         {
-            "loader": "dIceNet",
+            "loader": "dicenet",
             "params": {
                 "folder": "../datastore/sic/flowcast/aifs_1000/",
                 "hemisphere": "south",
@@ -96,7 +96,7 @@
         }
     ],
     "splitting": {
-        "split_depth": 5,
-        "minimum_datapoints": 5
+        "split_depth": 4,
+        "minimum_datapoints": 4
     }
 }

@@ -1,4 +1,5 @@
-polar-route==1.0.0
+polar-route @ git+https://github.com/bas-amop/PolarRoute.git@v1.1.9
+meshiphi @ git+https://github.com/bas-amop/MeshiPhi.git@tz/dicenet_loader
 cdsapi
 copernicusmarine==2.0.0
 bas-geoplot

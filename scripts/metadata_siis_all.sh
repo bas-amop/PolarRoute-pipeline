@@ -22,4 +22,10 @@ do
     echo ${found}
 done
 
+for found in $(find ${upload_directory} -iname dicenet_*_${vessel}.vessel_???????????????.geojson.gz ); 
+do
+    all_files_list=${all_files_list}" ${found}"
+    echo ${found}
+done
+
 python $scripts_directory/$script $all_files_list

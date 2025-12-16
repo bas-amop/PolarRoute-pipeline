@@ -55,24 +55,24 @@ application:
         - script: 
             name: check_datastore_manifest.py
             depends: check_active_hours.py
-        - script: 
-            name: mesh_generate_central.sh
-            depends: check_datastore_manifest.py
+        # - script: 
+        #     name: mesh_generate_central.sh
+        #     depends: check_datastore_manifest.py
         - script: 
             name: mesh_generate_southern.sh
             depends: check_datastore_manifest.py
         - script:
             name: mesh_generate_southern_dicenet.sh
             depends: check_datastore_manifest.py
-        - script: 
-            name: mesh_generate_northern.sh
-            depends: check_datastore_manifest.py
-        - script: 
-            name: vessel_add_northern.sh
-            depends: mesh_generate_northern.sh
-        - script: 
-            name: vessel_add_central.sh
-            depends: mesh_generate_central.sh
+        # - script: 
+        #     name: mesh_generate_northern.sh
+        #     depends: check_datastore_manifest.py
+        # - script: 
+        #     name: vessel_add_northern.sh
+        #     depends: mesh_generate_northern.sh
+        # - script: 
+        #     name: vessel_add_central.sh
+        #     depends: mesh_generate_central.sh
         - script: 
             name: vessel_add_southern.sh
             depends: mesh_generate_southern.sh
@@ -82,8 +82,8 @@ application:
         - script: 
             name: vessel_update_position.sh
             depends:
-            - mesh_generate_northern.sh
-            - mesh_generate_central.sh
+            # - mesh_generate_northern.sh
+            # - mesh_generate_central.sh
             - mesh_generate_southern.sh
             - mesh_generate_southern_dicenet.sh
         - script: 
@@ -99,26 +99,26 @@ application:
             depends:
             - vessel_add_southern.sh
             - waypoints_build.sh
-        - script: 
-            name: mesh_geojson_northern.sh
-            depends: vessel_add_northern.sh
-        - script: 
-            name: mesh_geojson_central.sh
-            depends: vessel_add_central.sh
+        # - script: 
+        #     name: mesh_geojson_northern.sh
+        #     depends: vessel_add_northern.sh
+        # - script: 
+        #     name: mesh_geojson_central.sh
+        #     depends: vessel_add_central.sh
         - script: 
             name: mesh_geojson_southern.sh
             depends: vessel_add_southern.sh
         - script:
             name: mesh_geojson_southern_dicenet.sh
             depends: vessel_add_southern_dicenet.sh
-        - script: 
-            name: mesh_geojson_split_central.sh
-            depends: mesh_geojson_central.sh
+        # - script: 
+        #     name: mesh_geojson_split_central.sh
+        #     depends: mesh_geojson_central.sh
         - script: 
             name: metadata_generate_all.sh
             depends:
-            - mesh_geojson_northern.sh
-            - mesh_geojson_split_central.sh
+            # - mesh_geojson_northern.sh
+            # - mesh_geojson_split_central.sh
             - mesh_geojson_southern.sh
             - mesh_geojson_southern_dicenet.sh
         - script: 
@@ -136,10 +136,10 @@ application:
         - script:
             name: metadata_siis_all.sh
             depends: upload_prepare_all.sh
-        - script:
-            name: upload_push_all.sh
-            depends: metadata_siis_all.sh
         # - script:
-        #     name: publish_html.sh # temporarily disabled
-        #     depends: metadata_siis_all.sh
+            # name: upload_push_all.sh
+            # depends: metadata_siis_all.sh
+        - script:
+            name: publish_html.sh # temporarily disabled
+            depends: metadata_siis_all.sh
 
