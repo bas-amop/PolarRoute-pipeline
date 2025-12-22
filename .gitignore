@@ -4,7 +4,6 @@ html/index.html
 logs/*
 inputs/*
 outputs/*
-venv/
 
 # Ignore workflow manager
 /workflow-manager/
