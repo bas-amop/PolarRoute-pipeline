@@ -47,6 +47,13 @@
                 "splitting_conditions": [
                     {
                         "SIC": {
+                            "threshold": 90,
+                            "upper_bound": 0.9,
+                            "lower_bound": 0.1
+                        }
+                    },
+                    {
+                        "SIC": {
                             "threshold": 80,
                             "upper_bound": 0.9,
                             "lower_bound": 0.1
@@ -78,6 +85,13 @@
                 "data_name": "SIC",
                 "fast_reprojection": true,
                 "splitting_conditions": [
+                    {
+                        "SIC": {
+                            "threshold": 90,
+                            "upper_bound": 0.9,
+                            "lower_bound": 0.1
+                        }
+                    },
                     {
                         "SIC": {
                             "threshold": 80,
