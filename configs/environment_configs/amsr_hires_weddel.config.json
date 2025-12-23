@@ -1,9 +1,9 @@
 {
     "region": {
-        "lat_min": -74,
-        "lat_max": -71.5,
-        "long_min": -80,
-        "long_max": -75,
+        "lat_min": -70,
+        "lat_max": -60,
+        "long_min": -70,
+        "long_max": -45,
         "start_time": "TODAY - 3",
         "end_time": "TODAY - 1",
         "cell_width": 5.0,
@@ -47,6 +47,13 @@
                 "splitting_conditions": [
                     {
                         "SIC": {
+                            "threshold": 95,
+                            "upper_bound": 0.9,
+                            "lower_bound": 0.1
+                        }
+                    },
+                    {
+                        "SIC": {
                             "threshold": 80,
                             "upper_bound": 0.9,
                             "lower_bound": 0.1
@@ -62,13 +69,6 @@
                     {
                         "SIC": {
                             "threshold": 5,
-                            "upper_bound": 0.9,
-                            "lower_bound": 0.1
-                        }
-                    },
-                    {
-                        "SIC": {
-                            "threshold": 0.1,
                             "upper_bound": 0.9,
                             "lower_bound": 0.1
                         }
