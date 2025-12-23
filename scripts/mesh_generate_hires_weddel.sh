@@ -6,4 +6,4 @@ set -e
 pipeline_directory=$PIPELINE_DIRECTORY
 scripts_directory=$SCRIPTS_DIRECTORY
 
-bash $scripts_directory/mesh_generate.sh $pipeline_directory/configs/environment_configs/amsr_weddel.config.json
+bash $scripts_directory/mesh_generate.sh $pipeline_directory/configs/environment_configs/amsr_hires_weddel.config.json

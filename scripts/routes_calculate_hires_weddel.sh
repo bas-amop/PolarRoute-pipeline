@@ -7,7 +7,7 @@ pipeline_directory=$PIPELINE_DIRECTORY
 scripts_directory=$SCRIPTS_DIRECTORY
 
 # Define the Region
-region=weddel
+region=hires_weddel
 
 
 
