@@ -77,6 +77,38 @@ application:
             name: vessel_add_southern.sh
             depends: mesh_generate_southern.sh
         - script: 
+            name: vessel_add_hires_weddel.sh
+            depends: mesh_generate_hires_weddel.sh
+        - script: 
+            name: vessel_update_position.sh
+            depends:
+            - mesh_generate_northern.sh
+            - mesh_generate_central.sh
+            - mesh_generate_southern.sh
+            - mesh_generate_hires_weddel.sh
+        - script: 
+            name: waypoints_build.sh
+            depends: vessel_update_position.sh
+        - script: 
+            name: routes_calculate_southern.sh
+            depends:
+            - vessel_add_southern.sh
+            - waypoints_build.sh
+        - script: 
+            name: routes_calculate_hires_weddel.sh
+            depends:
+            - vessel_add_hires_weddel.sh
+            - waypoints_build.sh
+        - script: 
+            name: mesh_geojson_northern.sh
+            depends: vessel_add_northern.sh
+        - script: 
+            name: mesh_geojson_central.sh
+            depends: vessel_add_central.sh
+        - script: 
+            name: mesh_geojson_southern.sh
+            depends: vessel_add_southern.sh
+        - script: 
             name: mesh_geojson_hires_weddel.sh
             depends: vessel_add_hires_weddel.sh
         - script: 
@@ -88,7 +120,7 @@ application:
             - mesh_geojson_northern.sh
             - mesh_geojson_split_central.sh
             - mesh_geojson_southern.sh
-            - mesh_geojson_weddel.sh
+            - mesh_geojson_hires_weddel.sh
         - script: 
             name: mesh_compress.sh
             depends:
@@ -110,4 +142,3 @@ application:
         # - script:
         #     name: publish_html.sh # temporarily disabled
         #     depends: metadata_siis_all.sh
-
