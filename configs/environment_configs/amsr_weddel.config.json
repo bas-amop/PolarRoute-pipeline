@@ -47,7 +47,7 @@
                 "splitting_conditions": [
                     {
                         "SIC": {
-                            "threshold": 90,
+                            "threshold": 95,
                             "upper_bound": 0.9,
                             "lower_bound": 0.1
                         }
@@ -84,26 +84,10 @@
                 "data_name": "uC,vC",
                 "splitting_conditions": []
             }
-        },
-        {
-            "loader": "thickness",
-            "params": {
-                "data_name": "thickness",
-                "file": "",
-                "value_fill_types": "parent"
-            }
-        },
-        {
-            "loader": "density",
-            "params": {
-                "data_name": "density",
-                "file": "",
-                "value_fill_types": "parent"
-            }
         }
     ],
     "splitting": {
-        "split_depth": 6,
+        "split_depth": 7,
         "minimum_datapoints": 5
     }
 }
