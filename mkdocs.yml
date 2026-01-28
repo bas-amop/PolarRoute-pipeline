@@ -1,6 +1,32 @@
 site_name: PolarRoute-pipeline
 repo_url: https://github.com/bas-amop/PolarRoute-pipeline/
-theme: readthedocs
+theme: 
+  name: material
+  logo: https://cdn.web.bas.ac.uk/bas-style-kit/0.7.3/img/logos-symbols/bas-roundel-inverse-transparent-64.png
+  favicon: https://cdn.web.bas.ac.uk/bas-style-kit/0.7.3/img/favicon/favicon-16x16.png
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    # Enables copying of code blocks
+    - content.code.copy
+    # Enables "edit this page" to contribute to docs
+    - content.action.edit
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: pink
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: pink
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
 plugins: 
   - search
   - mkdocstrings
@@ -15,3 +41,5 @@ nav:
   - using.md
   - how-polarroute-pipeline-works.md
   - development.md
+
+copyright: Copyright &copy; 2026 British Antarctic Survey
